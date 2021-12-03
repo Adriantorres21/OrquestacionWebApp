@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  namespace: atorres
+  labels:
+    app: app-crud
+    tier: frontend
+spec:
+  selector:
+    matchLabels:
+      app: app-crud
+      tier: frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app-crud
+        tier: frontend
+    spec:
+      containers:
+      - name: app
+        image: adriantorres21/app
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8081

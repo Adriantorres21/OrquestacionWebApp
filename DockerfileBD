@@ -1,0 +1,9 @@
+FROM mysql
+
+ENV MYSQL_ROOT_PASSWORD=secret
+ENV MYSQL_DATABASE=mascotas
+ENV MYSQL_USER=adriantorres
+ENV MYSQL_PASSWORD=secret
+
+
+COPY ./mascotas.sql /docker-entrypoint-initdb.d/

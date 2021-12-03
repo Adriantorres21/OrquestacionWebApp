@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mibd
+  namespace: atorres
+  labels:
+    app: bd
+    tier: backend
+spec:
+  selector:
+    matchLabels:
+      app: bd
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: bd
+        tier: backend
+    spec:
+      containers:
+      - image: adriantorres21/bd
+        name: mysql
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: bd-pvc
